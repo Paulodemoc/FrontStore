@@ -80,7 +80,7 @@ $db['default'] = array(
 	'username' => '',
 	'password' => '',
 	'database' => 'frontstore',
-	'dbdriver' => 'mysqli',
+	'dbdriver' => 'mongodb',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
 	'db_debug' => (ENVIRONMENT !== 'production'),

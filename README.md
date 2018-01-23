@@ -1,1 +1,1 @@
-FrontStore2
+Front Store
