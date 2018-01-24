@@ -7,22 +7,22 @@
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-      <a class="navbar-brand" href="#">Front Store</a>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark top">
+			<?php echo anchor('home','Front Store',array('class'=>'navbar-brand')); ?>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
-          <!-- <li class="nav-item active">
-            <?php echo anchor('home','Home',array('class'=>'nav-link')); ?>
-          </li> -->
+          <li class="nav-item">
+            <?php echo anchor('products','Products',array('class'=>'nav-link')); ?>
+          </li>
 		    </ul>
       <?php if(!$this->session->has_userdata('fb_access_token')): ?>
         <form class="form-inline my-2 my-lg-0">	
           <?php echo anchor('home/login', 
-            img('https://scontent.frao1-2.fna.fbcdn.net/v/t39.2365-6/17639236_1785253958471956_282550797298827264_n.png?oh=8ba4730dd8728f6fc0a63c7c6f924739&oe=5AD919EA', 
+            img('img/facebookBtn.png', 
               FALSE,
               array('alt' => 'Login with Facebook',
               'width' => '250')
@@ -48,6 +48,24 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
   <script src="<?php echo base_url();?>js/popper.min.js" ></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+	<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId            : 'your-app-id',
+      autoLogAppEvents : true,
+      xfbml            : true,
+      version          : 'v2.11'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "https://connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
   </body>
 </html>

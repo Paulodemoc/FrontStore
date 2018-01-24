@@ -7,14 +7,13 @@ define("app_secret", "a96ced6d1db82bf2add3eb2b36db996d");
 class Home extends CI_Controller {
 	public function index()
 	{
+		$this->load->model('ProductsModel','Products');
 		$data = array();
 		$this->layout->set('title', 'Home');
 
-		//todo: get products
-		$products = array();
-		$data['products'] = $products;
+		$data['products'] = $this->Products->getAll('name','asc');
 
-		$this->layout->load('default', 'contents' , 'home', $data);
+		$this->layout->load('default', 'contents' , 'products', $data);
 	}
 
 	public function login()
@@ -29,13 +28,22 @@ class Home extends CI_Controller {
 		  
 		  $permissions = ['email']; // Optional permissions
 		  $loginUrl = $helper->getLoginUrl(site_url('home/loginCallback'), $permissions);
+
+		  //save referrer page to proper return
+		  if (isset($_SERVER['HTTP_REFERER']))
+		  {
+		 	$this->session->set_flashdata('returnUrl',$_SERVER['HTTP_REFERER']);
+		  }
 		  redirect($loginUrl, 'refresh');
 	}
 
 	public function logout(){
 		$this->session->unset_userdata('fb_access_token');
 		$this->session->unset_userdata('loggedUser');
-		redirect('home/index','refresh');
+		if (isset($_SERVER['HTTP_REFERER']))
+			redirect($_SERVER['HTTP_REFERER'],'refresh');
+		else
+			redirect('home/index','refresh');
 	}
 
 	public function loginCallback(){
@@ -102,8 +110,25 @@ class Home extends CI_Controller {
 			
 			$user = $response->getGraphUser();
 
+			//todo: check if user exists in database and create if not
+
+			$this->load->model('UsersModel','Users');
+
+			$storeUser = $this->Users->GetByFacebookId($user->getId());
+
+			if($storeUser == null){
+				$this->Users->Insert(array(
+					'name'=>$user->getName(),
+					'facebookid'=>$user->getId(),
+				));
+			}
+
 			$this->session->set_userdata('loggedUser', $user->getName());
+			$this->session->set_userdata('loggedUserId', $user->getId());
 	  
-		  redirect('home/index','refresh');
+			if($this->session->has_userdata('returnUrl'))
+				redirect($this->session->flashdata('returnUrl'),'refresh');
+			else 
+			  redirect('home/index','refresh');
 	}
 }

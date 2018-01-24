@@ -1,6 +1,0 @@
-● Login in the application just using an SSO provider (Facebook or Google);
-● List products, containing photo and name;
-● View product’s detail
-● Make comments on a product
-● Share a product using Twitter or Facebook
-● Logout from app
