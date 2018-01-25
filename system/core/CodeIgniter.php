@@ -406,11 +406,6 @@ if ( ! is_php('5.4'))
 	{
 		
 		$e404 = TRUE;
-		echo APPPATH.'controllers/'.$RTR->directory.$class.'.php'; 
-		var_dump(file_exists(APPPATH.'controllers/'.$RTR->directory.$class.'.php'));
-		$dirs = array_filter(glob(APPPATH.'controllers/*'), 'is_file');
-		print_r( $dirs);
-		die;
 	}
 	else
 	{
@@ -419,7 +414,6 @@ if ( ! is_php('5.4'))
 		if ( ! class_exists($class, FALSE) OR $method[0] === '_' OR method_exists('CI_Controller', $method))
 		{
 			$e404 = TRUE;
-			//echo "class $class method $method"; die;
 		}
 		elseif (method_exists($class, '_remap'))
 		{
@@ -429,7 +423,6 @@ if ( ! is_php('5.4'))
 		elseif ( ! method_exists($class, $method))
 		{
 			$e404 = TRUE;
-			//echo "class $class method $method"; die;
 		}
 		/**
 		 * DO NOT CHANGE THIS, NOTHING ELSE WORKS!
@@ -448,7 +441,6 @@ if ( ! is_php('5.4'))
 			if ( ! $reflection->isPublic() OR $reflection->isConstructor())
 			{
 				$e404 = TRUE;
-				//echo "class $class method $method"; die;
 			}
 		}
 	}
