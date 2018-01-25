@@ -268,6 +268,8 @@ switch (ENVIRONMENT)
 		exit(3); // EXIT_CONFIG
 	}
 	echo $application_folder; die;
+	$dirs = array_filter(glob($application_folder.'/*'), 'is_dir');
+	print_r( $dirs);
 	define('APPPATH', $application_folder.DIRECTORY_SEPARATOR);
 
 	// The path to the "views" directory
