@@ -404,8 +404,13 @@ if ( ! is_php('5.4'))
 
 	if (empty($class) OR ! file_exists(APPPATH.'controllers/'.$RTR->directory.$class.'.php'))
 	{
+		
 		$e404 = TRUE;
-		//echo APPPATH.'controllers/'.$RTR->directory.$class.'.php'; die;
+		echo APPPATH.'controllers/'.$RTR->directory.$class.'.php'; 
+		var_dump(file_exists(APPPATH.'controllers/'.$RTR->directory.$class.'.php'));
+		$dirs = array_filter(glob(APPPATH.'controllers/*'), 'is_file');
+		print_r( $dirs);
+		die;
 	}
 	else
 	{
