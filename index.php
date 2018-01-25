@@ -265,8 +265,8 @@ switch (ENVIRONMENT)
 		echo 'Your application folder path does not appear to be set correctly. Please open the following file and correct this: '.SELF;
 		exit(3); // EXIT_CONFIG
 	}
-	echo str_replace('app/','',$application_folder.DIRECTORY_SEPARATOR; die;
-	define('APPPATH', str_replace('app/','',$application_folder.DIRECTORY_SEPARATOR);
+
+	define('APPPATH', str_replace('app/','',$application_folder.DIRECTORY_SEPARATOR));
 
 	// The path to the "views" directory
 	if ( ! isset($view_folder[0]) && is_dir(APPPATH.'views'.DIRECTORY_SEPARATOR))
